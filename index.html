@@ -1,0 +1,2815 @@
+<html><head><base href="." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morocco Venture Network</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+
+/* Ajustement général pour éviter le débordement sur les petits écrans */
+body, .hero, section, .modal-content {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+/* Pour que les sections s'adaptent à la largeur de l'écran en mode smartphone */
+@media (max-width: 768px) {
+    .nav-container, .hero-content, .values-grid, .solutions-grid, .experts-grid, .publications-grid {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+
+/* Pour rendre les tableaux réactifs */
+.price-table {
+    width: 100%;
+    overflow-x: auto;
+    display: block; /* Rend les tableaux défilables horizontalement sur petits écrans */
+}
+
+.price-table th, .price-table td {
+    min-width: 120px; /* Définir une largeur minimale pour éviter l'écrasement du contenu */
+}
+
+:root {
+    --primary: #003366;    /* Navy blue */
+    --secondary: #9a9838;  /* Golden */
+    --dark: #1B1B1B;      /* Dark grey */
+    --light: #F5F5F5;     /* Light grey */
+    --white: rgb(242, 243, 237);     /* White */
+    --accent: #4A4A4A;    /* Medium grey */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    color: var(--dark);
+    margin-block-start: 1em;
+    margin-block-end: 0.25em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    color: var(--dark);
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+p {
+    display: block;
+    font-size: 14px;
+    color: var(--accent);
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    text-align: justify;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+}
+
+p.value-description {
+    display: block;
+    font-size: 14px;
+    color: #d92929;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+h6{
+    display: block;
+    font-size: 10px;
+    color: var(--accent);
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    text-align: justify;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+h7{
+    display: block;
+    font-size: 12px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    text-align: justify;
+}
+
+h8{
+    display: block;
+    font-size: 14px;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+h9{
+    display: block;
+    font-size: 14px;
+    color: var(--accent);
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    text-align: center;
+}
+
+
+h10{
+    display: block;
+    color: #e9e8bb;
+    font-size: 14px;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+span.date{
+    display: block;
+    font-size: 14px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    text-align: justify;
+}
+
+/* Navigation */
+nav {
+    background: rgb(242, 243, 237);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.0);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 15px;
+    padding: 1rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+    z-index: 0;
+}
+
+.nav-link:hover {
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.1rem 1.5rem;
+    z-index: 0;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    color: var(--primary);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw; /* Limite la largeur à celle de l'écran */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23003366"/></svg>');
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    padding-top: 60px;
+    transition: display 0.3s ease-in-out;
+}
+
+.hero-content {
+    max-width: 1000px; /* Increased to accommodate video */
+    padding: 2rem;
+    width: 100%;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Video container */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Sections */
+section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section {
+    padding: 5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+}
+.section-title2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 12rem;
+    color: var(--dark);
+}
+
+/* Values Grid */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.value-card {
+    background: var(--white);
+    padding: 1rem;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.value-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.value-card h3 {
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.value-card .value-description {
+    color: #666;
+}
+
+.value-card .value-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary);
+    color: var(--white);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.value-card:hover .value-details {
+    opacity: 1;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Solutions Grid */
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.solution-card {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.solution-card:hover {
+    transform: translateY(-10px);
+}
+
+.card-icon {
+    height: 200px;
+    background: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.solution-card:hover .card-icon img {
+    transform: scale(1.1);
+}
+
+/* Experts */
+.experts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.expert-card {
+    text-align: center;
+}
+
+.expert-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    background:rgb(242, 243, 237);
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn {
+    background: var(--primary);
+    color: var(--white);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--secondary); /* Couleur secondaire au survol */
+    transform: translateY(-3px); /* Effet de levée au survol */
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    background: var(--light);
+    color: var(--dark);
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.contact-methods {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem auto;
+    max-width: 600px;
+    flex-wrap: wrap;
+}
+
+.method-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    position: relative;
+    overflow: hidden;
+    width: 250px;
+    margin-bottom: 1rem;
+}
+
+.method-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.method-card h3 {
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.method-card p {
+    color: var(--accent);
+}
+
+.method-card .method-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary);
+    color: var(--white);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.method-card:hover {
+    transform: translateY(-5px);
+}
+
+.method-card:hover .method-details {
+    opacity: 1;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.form-group label i {
+    color: var(--primary);
+}
+
+.form-group select, 
+
+.left-align-select {
+    text-align: left; /* Aligner le texte à gauche */
+    display: block; /* S'assurer que l'élément prend toute la largeur */
+    width: 100%;
+    border: 1px solid #3498db; /* Changer la couleur du contour */
+    border-radius: 5px; /* Arrondir les coins */
+    padding: 0.8rem; /* Ajouter du padding pour l'espacement interne */
+    transition: border-color 0.3s; /* Transition pour un effet doux lors du changement de couleur */
+}
+
+/* Ajuster la largeur si nécessaire */
+.left-align-select {
+    max-width: 100%; /* Ajuster si nécessaire pour limiter la largeur */
+}
+
+.form-group input,
+.form-group textarea {
+    border-radius: 8px;
+    transition: border-color 0.3s;
+    border: 1px solid #3498db; /* Changer la couleur du contour */
+    border-radius: 5px; /* Arrondir les coins */
+    padding: 0.8rem; /* Ajouter du padding pour l'espacement interne */
+    transition: border-color 0.3s; /* Transition pour un effet doux lors du changement de couleur */
+}
+
+.form-group select:focus, 
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.form-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+input[type="date"] {
+    color: var(--primary);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    color: var(--primary);
+}
+
+/* Style for disabled dates */
+input[type="date"]:disabled {
+    color: #ccc;
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background:rgb(242, 243, 237);
+    flex-direction: column;
+    padding-top:10%;
+    padding-bottom: 10%;
+    text-align: center;
+    z-index: 1001;
+}
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+        color: #e9e8bb;
+    }
+
+    .form-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-methods {
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+    
+    .method-card {
+        width: 100%; /* Full width on mobile */
+        max-width: 300px; /* Maximum width */
+    }
+}
+
+/* Footer Styles */
+footer {
+    background:rgb(242, 243, 237);
+    color: var(--primary);
+    padding: 1.25rem 5%;
+    margin-top: 1.25rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+/* Add padding to body to prevent content from being hidden behind fixed footer */
+body {
+    padding-bottom: 100px; /* Adjust based on footer height */
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.5rem;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.social-link:hover {
+    color: var(--secondary);
+}
+
+/* Chat Box */
+.chat-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 1000;
+}
+
+.chat-header {
+    background: var(--primary);
+    color: var(--white);
+    padding: 1rem;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.chat-input {
+    padding: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.chat-input input {
+    width: calc(100% - 50px);
+}
+
+.chat-toggle {
+    position: fixed;
+    bottom: 08px;
+    right: 08px;
+    background: var(--primary);
+    color: rgb(242, 243, 237);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.publications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-items: center; /* Center cards in grid */
+}
+
+.publication-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: opacity 0.3s ease, transform 0.3s ease;/* Add these fixed dimensions */
+    width: 100%;
+    max-width: 400px; /* Maximum width for each card */
+    margin: 0 auto; /* Center cards */
+    height: 450px; /* Fixed height */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Add for publication grid container */
+.publications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-items: center; /* Center cards in grid */
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 5% auto;
+    padding: 1rem;
+    width: 95%;
+    max-width: 800px;
+    border-radius: 10px;
+    position: relative;
+    animation: modalSlide 0.3s ease-out;
+}
+
+@keyframes modalSlide {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark);
+}
+
+.modal-header {
+    margin-bottom: 2rem;
+}
+
+.modal-body {
+    margin-bottom: 2rem;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.solution-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.detail-card {
+    background: var(--light);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+
+.price-table th,
+.price-table td {
+    padding: 0.5rem;
+    border: 0.5px solid var(--light);
+    text-align: left;
+    min-width: 80px
+}
+
+.price-table th {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.price-table tr:nth-child(even) {
+    background: var(--light);
+}
+
+.advantage-list {
+    list-style: none;
+    padding: 0;
+}
+
+.advantage-list li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.advantage-list li i {
+    color: var(--primary);
+}
+
+.error-modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.error-modal-content {
+    background-color: var(--white);
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    animation: modalSlide 0.3s ease-out;
+}
+
+.error-modal .btn {
+    margin-top: 1rem;
+}
+
+.social-share-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.social-share-btn:hover {
+    transform: translateY(-3px);
+    color: var(--secondary);
+}
+
+.social-share-btn i {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.join-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: rgb(242, 243, 237); /* Utilisation de la couleur primaire */
+    color: var(--primary);
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    
+}
+
+.join-button i {
+    margin-right: 0.5rem; /* Espacement entre l'icône et le texte */
+    font-size: 1.2rem;
+}
+
+.join-button:hover {
+    background-color: var(--secondary); /* Couleur secondaire au survol */
+    transform: translateY(-3px); /* Effet de levée au survol */
+}
+
+.join-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 51, 102, 0.5);
+}
+
+.fa {
+font-family: var(--fa-style-family, "Font Awesome 6 Free");
+font-weight: var(--fa-style, 900);
+display: flex; /* Use flexbox for centering */
+justify-content: center; /* Center horizontally */
+align-items: center; /* Center vertically */
+height: -10px; /* Set a height if needed for vertical centering */
+text-align: center; /* Ensure text (icon) is centered */
+margin-bottom: 2rem;
+color: var(--accent);
+}
+
+.fa-user{
+font-family: var(--fa-style-family, "Font Awesome 6 Free");
+font-weight: var(--fa-style, 900);
+display: flex; /* Use flexbox for centering */
+justify-content: center; /* Center horizontally */
+align-items: center; /* Center vertically */
+text-align: center; /* Ensure text (icon) is centered */
+color: var(--accent);
+}
+
+
+</style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container" style="display: flex; align-items: center; justify-content: space-between;">
+            <a class="log" data-home="true">
+                <img src="log.png" alt="Morocco Venture Network Logoo" style="height: 40px; width: auto; margin: 0 auto;">
+            </a>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a class="nav-link" data-section="verger">Nos Services</a></li>
+                <li><a class="nav-link" data-section="solutions">Nos Solutions</a></li>
+                <li><a class="nav-link" data-section="cultivateurs">Nos Experts</a></li>
+                <li><a class="nav-link" data-section="recoltes">Nos Publications</a></li>
+                <li><a class="nav-link" data-section="contact">Contact & Souscriptions</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="hero">
+    <div class="hero-content">
+        <a class="logo" data-home="true">
+            <img src="log.png" alt="Morocco Venture Network Logo" style="height: 80px; width: auto; margin: 0 auto;">
+        </a>
+        <br></br>
+        <h1>Morocco Venture Network</h1>
+        <h10>Construisons ensemble un avenir d'opportunités.</h10>
+        <div class="video-container" style="margin: 2rem auto; max-width: 800px;">
+            <iframe 
+                width="100%" 
+                height="400" 
+                src="https://www.youtube.com/embed/cfhtyvkYvFc?cc_load_policy=1&cc_lang_pref=fr&hl=fr" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+            <button class="btn" data-section="verger">Qui sommes-nous?</button>
+            <button class="btn" data-section="solutions">Découvrir nos solutions</button>
+        </div>
+        <br></br>
+        <div class="join-button" id="joinButton">
+            <i class="fas fa-briefcase"></i>
+            <span>Vous êtes consultant ?<br>Rejoignez notre réseau</span>
+        </div>
+    </div>
+</div>
+
+<section id="verger">
+    <h2 class="section-title">Nos services</h2>
+    <p> Morocco Ventures Network (MVN) propose un ensemble complet de solutions stratégiques pour accompagner les projets d'investissement au Maroc. Les services couvrent l’analyse de marché, le développement commercial et la transformation digitale, avec un accent sur la précision des données, l'expertise spécialisée et l'optimisation des opportunités d’investissement.</p>
+    <div class="value-card">
+        <i class="fas fa-chart-line"></i>
+        <h3>Analyse de marché</h3>
+        <p class="value-description">Des analyses pour des décisionss stratégiques</p>
+        <div class="value-details">
+            Identification des opportunités et risques clés grâce à une étude approfondie des tendances économiques, des comportements consommateurs et des forces concurrentielles du marché marocain.
+        </div>
+    </div>
+    <div class="value-card">
+            <i class="fas fa-code"></i>
+            <h3>Technologie et Innovation</h3>
+            <p class="value-description">Digitalisation et automatisation</p>
+            <div class="value-details">
+                Solutions numériques et conseils en transformation digitale pour automatiser les processus et améliorer l'efficacité.
+            </div>
+        </div>
+        <div class="value-card">
+            <i class="fas fa-database"></i>
+            <h3>Data & KPI</h3>
+            <p class="value-description">Des données pour des décisions éclairées</p>
+            <div class="value-details">
+                Rapports détaillés, veille sectorielle, et indicateurs de performance clés pour guider vos décisions stratégiques au Maroc.
+            </div>
+        </div>
+        <p>Les partenaires accèdent au réseau de Morocco Ventures Network pour se connecter avec des experts, profiter de consultations privées et bénéficier d'analyses exclusives tirées d'entretiens spécialisés. Que ce soit pour explorer de nouvelles opportunités, suivre des stratégies d'investissement existantes ou découvrir des idées innovantes, cette plateforme offre des perspectives précieuses.
+        </p>    
+        <div class="value-card">
+            <i class="fas fa-briefcase"></i>
+            <h3>Développement commercial</h3>
+            <p class="value-description">Croissance ciblée et impact</p>
+            <div class="value-details">
+                Stratégies de croissance et d'implantation pour maximiser les opportunités commerciales et établir des partenariats solides.
+            </div>
+        </div>
+        <div class="value-card">
+            <i class="fas fa-bullhorn"></i>
+            <h3>Marketing et Communication</h3>
+            <p class="value-description">Communiquez, connectez, croissez</p>
+            <div class="value-details">
+                Campagnes digitales et stratégies de marque pour maximiser la visibilité et établir une forte présence au Maroc.
+            </div>
+        </div>
+        <div class="value-card">
+            <i class="fas fa-coins"></i>
+            <h3>Finance et Comptabilité</h3>
+            <p class="value-description">Optimisez votre rentabilité</p>
+            <div class="value-details">
+                Expertise financière pour audits, planification stratégique, gestion des subventions et optimisation fiscale.
+            </div>
+        </div>
+        <p>Partenaire de confiance pour des investissements avisés au Maroc, notre plateforme est dédiée à l’accompagnement des entreprises, PME et start-ups en proposant des solutions sur mesure, adaptées à leurs besoins spécifiques. Grâce à une expertise locale approfondie et un réseau étendu, nous vous guidons à chaque étape de votre projet d’investissement, de la création de votre activité à l’optimisation de vos opérations.</p>    
+        <div class="value-card">
+            <i class="fas fa-user-friends"></i>
+            <h3>Ressources humaines</h3>
+            <p class="value-description">Valorisez votre capital humain</p>
+            <div class="value-details">
+                Solutions de recrutement, gestion RH, conformité légale et développement des compétences pour optimiser la performance.
+            </div>
+        </div>
+        <div class="value-card">
+            <i class="fas fa-clipboard"></i>
+            <h3>Appui administratif</h3>
+            <p class="value-description">Simplifiez vos démarches</p>
+            <div class="value-details">
+                Assistance pour l'enregistrement, la gestion des formalités, la logistique et les opérations d'import-export.
+            </div>
+        </div>
+        <div class="value-card">
+            <i class="fas fa-gavel"></i>
+            <h3>Services juridiques</h3>
+            <p class="value-description">Sécurisez vos activités</p>
+            <div class="value-details">
+                Conseils en droit des affaires, conformité réglementaire et protection juridique pour garantir le respect des normes locales.
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <h2 class="section-title">Nos missions</h2><i class="fa fa-trophy"></i>
+    <p> Morocco Ventures Network aide ses partenaires à prendre des décisions d'investissement éclairées grâce à des produits et services de premier ordre. L'objectif est de fournir des informations pertinentes, de haute qualité et en temps opportun pour guider chaque étape du processus d'investissement.
+        <br></br>
+        L'ambition est de devenir le principal facilitateur, connectant les entreprises aux consultants au Maroc, en étant reconnu pour son expertise locale, son service personnalisé et son réseau étendu.
+        <br></br>
+        Morocco Ventures Network est une plateforme dédiée à soutenir les entreprises, les PME et les startups dans leurs investissements au Maroc. Elle offre une gamme complète de services pour répondre à leurs besoins administratifs, financiers et stratégiques.</p>
+    <h2 class="section-title">Nos valeurs</h2><i class="fa fa-heart"></i>
+        <p> L'objectif est de fournir des services de la plus haute qualité : La qualité est au cœur de notre fonctionnement. L'engagement est de livrer l'excellence dans chaque service, afin d'obtenir des résultats qui dépassent les attentes. En maintenant des standards rigoureux et une attention méticuleuse aux détails, l'objectif est de créer une valeur durable dans tout ce qui est entrepris.
+        <br></br>
+        L'innovation est au cœur de l'approche : Dans un monde en constante évolution, l'importance de l'innovation est cruciale. L'exploration continue de nouvelles méthodes, technologies et stratégies permet de rester à l'avant-garde des tendances et de fournir des solutions de pointe.
+        <br></br>
+        Le succès des partenaires est une priorité : Une écoute attentive des besoins permet de travailler en étroite collaboration pour personnaliser les solutions, visant à répondre au mieux aux objectifs. L'accent est mis sur l'établissement de relations solides à long terme, en fournissant un soutien personnalisé à chaque étape.
+        <br></br>
+        La collaboration et les partenariats sont essentiels : La diversité des perspectives et des forces de chaque membre de l'équipe et partenaire est valorisée. En cultivant une culture de coopération et de respect mutuel, les résultats obtenus sont supérieurs à la somme des parties.
+        <br></br>
+        L'honnêteté et la transparence guident toutes les actions : L'intégrité est primordiale. La transparence, l'honnêteté et la responsabilité sont au cœur des interactions, renforçant la confiance dans tous les aspects des activités.</p>
+</section>
+
+
+
+<section id="solutions">
+    <h2 class="section-title">Nos Solutions</h2>
+    <p> Morocco Ventures Network (MVN) offre un ensemble de solutions stratégiques conçues pour aider les entreprises à surmonter les défis spécifiques rencontrés dans le contexte marocain. En collaborant avec MVN, les partenaires bénéficient d’une expertise locale approfondie qui leur permet d'identifier et d'exploiter les opportunités de croissance.</p>
+    <div class="solutions-grid">
+        <div class="solution-card">
+            <div class="card-icon">
+                <img alt="Business meeting discussing strategic planning and analysis" src="https://images.unsplash.com/photo-1556740772-1a741367b93e" style="width: 100%; height: 100%; object-fit: cover;">            
+            </div>
+            <div class="card-content">
+                <h3>Consulting Stratégique</h3>
+                <p>Des stratégies ciblées pour maximiser votre succès</p>
+                <button class="btn">En savoir plus</button>
+            </div>
+        </div>
+        <div class="solution-card">
+            <div class="card-icon">
+                <img alt="Personnes se serrant la main lors d'une réunion d'affaires" src="https://plus.unsplash.com/premium_photo-1680404114169-e254afa55a16?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width: 100%; height: 100%; object-fit: cover;">            </div>
+            <div class="card-content">
+                <h3>Mise en Relation</h3>
+                <p>Réseautage stratégique et connexions ciblées</p>
+                <button class="btn">En savoir plus</button>
+            </div>
+        </div>
+        <div class="solution-card">
+            <div class="card-icon">
+                <img alt="Écran d'ordinateur affichant des graphiques de données et des analyses" src="https://plus.unsplash.com/premium_photo-1683141154082-324d296f3c66?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width: 100%; height: 100%; object-fit: cover;">            </div>
+            <div class="card-content">
+                <h3>Data & Veille</h3>
+                <p>Données et insights pour des décisions éclairées</p>
+                <button class="btn">En savoir plus</button>
+            </div>
+        </div>
+        </div>
+        <p> Notre approche, centrée sur l’analyse de marché, le développement commercial et la transformation digitale, permet de structurer efficacement l'expansion des entreprises tout en optimisant leurs ressources. Grâce à nos solutions personnalisées, les entreprises peuvent moderniser leurs processus, améliorer leur compétitivité et prendre des décisions éclairées pour garantir leur succès à long terme.</p>
+        <p> Les connaissances locales et l'expertise spécialisée sont cruciales pour investir avec succès au Maroc. Morocco Ventures Network offre un accès à un réseau d'experts maîtrisant le marché et la réglementation marocains. Ces compétences permettent aux entreprises d'identifier les meilleures opportunités, de minimiser les risques et d'optimiser leurs investissements pour réussir durablement au Maroc.</p>
+        <div class="solutions-grid">
+
+
+            <div class="solution-card">
+                <div class="card-icon">
+                    <img alt="Documents administratifs organisés sur un bureau" src="https://images.unsplash.com/photo-1679395561581-9d9bc2584047?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width: 100%; height: 100%; object-fit: cover;">            </div>
+                <div class="card-content">
+                    <h3>Soutien Administratif</h3>
+                    <p>Accompagnement juridique et administratif sur mesure</p>
+                    <button class="btn">En savoir plus</button>
+                </div>
+            </div>
+            <div class="solution-card">
+                <div class="card-icon">
+                    <img alt="Graphiques financiers et calculatrice sur une table" src="https://images.unsplash.com/photo-1554224154-22dec7ec8818" style="width: 100%; height: 100%; object-fit: cover;">            </div>
+                <div class="card-content">
+                    <h3>Financement</h3>
+                    <p>Accédez aux fonds nécessaires pour votre croissance</p>
+                    <button class="btn">En savoir plus</button>
+                </div>
+            </div>
+            <div class="solution-card">
+                <div class="card-icon">
+                    <img alt="Stratégie de marketing digital affichée sur un écran" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" style="width: 100%; height: 100%; object-fit: cover;">            </div>
+                <div class="card-content">
+                    <h3>Communication & Marketing</h3>
+                    <p>Stratégies percutantes pour maximiser votre impact</p>
+                    <button class="btn">En savoir plus</button>
+                </div>
+            </div>
+            </div>
+            <p> Travailler avec Morocco Ventures Network, c'est s'assurer d'un accompagnement stratégique et sur-mesure à chaque étape du développement d'une entreprise. Grâce à une compréhension approfondie des enjeux locaux et à une expertise sectorielle pointue, MVN guide ses partenaires dans la mise en place de stratégies efficaces et adaptées à leurs besoins spécifiques. En maximisant les résultats dans un environnement en constante évolution, MVN permet aux entreprises de s'implanter avec succès, d'optimiser leurs performances et de saisir les opportunités de croissance tout en minimisant les risques associés à l'investissement au Maroc.</p>
+    
+    </section>
+
+
+
+<section id="cultivateurs">
+    <h2 class="section-title">Nos Experts</h2>
+    <p>Nos consultants, issus d'une diversité de secteurs, apportent une expertise de pointe et une connaissance approfondie du marché marocain et international. Chacun d'eux est un professionnel chevronné, doté d'années d'expérience dans son domaine, allant de l'analyse de marché, la finance, la stratégie commerciale, aux technologies émergentes.</p>
+    <p>Notre mission principale : accompagner nos clients avec des solutions sur mesure, adaptées à leurs besoins, afin de saisir les opportunités de croissance et d'innovation. Grâce à leur savoir-faire et à leur engagement, nous vous garantissons un service de qualité, à la hauteur de vos ambitions.</p>
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="consultant">Consultant</button>
+        <button class="filter-btn" data-filter="interne">Interne</button>
+    </div>
+<div class="experts-grid">
+    <div class="expert-card" data-category="interne">
+        <div class="expert-image">
+            <i class="fas fa-user"></i>
+        </div>
+        <h3>Alban</h3>
+        <h9>Optimisation des processus et automatisation des tests pour une meilleure efficacité.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+    <div class="expert-card" data-category="interne">
+        <div class="expert-image">
+            <i class="fas fa-user"></i>
+        </div>
+        <h3>Bernard</h3>
+        <h9>Conception et structuration de plans d'affaires détaillés pour votre croissance réussie.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+    <div class="expert-card" data-category="consultant">
+        <div class="expert-image">
+            <i class="fas fa-user"></i>
+        </div>
+        <h3>Charles</h3>
+        <h9>Création de sites web optimisés avec sécurité renforcée et meilleures pratiques SEO.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+    <div class="expert-card" data-category="interne">
+        <div class="expert-image">
+            <i class="fas fa-user"></i>
+        </div>
+        <h3>Daniel</h3>
+        <h9>Collecte et analyse de données de marché pour des décisions stratégiques éclairées.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+    <div class="expert-card" data-category="interne">
+        <div class="expert-image"><i class="fas fa-user"></i></div>
+        <h3>Elia</h3>
+        <h9>Acquisition de données précises pour des études stratégiques sur mesure.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+    <div class="expert-card" data-category="consultant">
+        <div class="expert-image"><i class="fas fa-user"></i></div>
+        <h3>Fred</h3>
+        <h9>Comptabilité avancée, fiscalité et rapports financiers adaptés à vos besoins.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+    <div class="expert-card" data-category="consultant">
+        <div class="expert-image"><i class="fas fa-user"></i></div>
+        <h3>Gaelle</h3>
+        <h9>Gestion efficace des formalités administratives et conformité réglementaire.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+    <div class="expert-card" data-category="consultant">
+        <div class="expert-image"><i class="fas fa-user"></i></div>
+        <h3>Henri</h3>
+        <h9>Conception de campagnes marketing personnalisées et stratégies adaptées à votre cible.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+    <div class="expert-card" data-category="consultant">
+        <div class="expert-image"><i class="fas fa-user"></i></div>
+        <h3>Ilyas</h3>
+        <h9>Optimisation de marque, stratégies digitales et communication efficace pour votre croissance.</h9>
+        <button class="btn">Voir le profil</button>
+    </div>
+</div>
+</section>
+
+<section id="recoltes">
+    <h2 class="section-title">Nos publications</h2>
+    <div class="form-group" style="max-width: 600px; margin: 0 auto 2rem auto;">
+        <input type="text" id="recoltes-search" placeholder="Rechercher dans nos récoltes..." style="width: 100%; padding: 1rem; border-radius: 25px;">
+    </div>
+    <div id="no-results" style="display: none; text-align: center; margin: 2rem auto; max-width: 600px;">
+        <p style="color: var(--accent); margin-bottom: 1rem;">Aucun résultat trouvé. Essayez avec:</p>
+        <div id="suggestions" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        </div>
+    </div>
+    <div class="publications-grid">
+        <div class="publication-card" data-id="1">
+            <img src="https://images.unsplash.com/photo-1724906019900-601545c07107?q=80&w=1015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pommes rouges dans un verger" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Le Maroc en 2024 : Un Hub Technologique et Économique</h3>
+            <span class="date">12 Nov 2024</span>
+            <p>Au cours des dernières années, le Maroc s'est affirmé comme un pôle technologique majeur en Afrique, attirant les regards des ...</p>
+            <button class="btn" data-id="1">Lire plus</button>
+        </div>
+        <div class="publication-card" data-id="2">
+            <img src="https://plus.unsplash.com/premium_photo-1678743133511-94a98aa6af2f?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Vue sur des panneaux solaires" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Transition Énergétique au Maroc</h3>
+            <span class="date">12 Nov 2024</span>
+            <p>Le Maroc est reconnu comme un pionnier de la transition énergétique en Afrique, grâce à son engagement en faveur des énergies...</p>
+            <button class="btn" data-id="2">Lire plus</button>
+        </div>
+        <div class="publication-card" data-id="3">
+            <img src="https://images.unsplash.com/photo-1675695754195-b0f682bf4daa?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bâtiments modernes à Rabat" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Smart Cities : Le Futur Urbain du Maroc</h3>
+            <span class="date">11 Nov 2024</span>
+            <p>Casablanca se positionne à la pointe des initiatives smart cities au Maroc. Avec des projets de digitalisation des services ...</p>
+            <button class="btn" data-id="3">Lire plus</button>
+        </div>
+        <div class="publication-card" data-id="4">
+            <img src="https://plus.unsplash.com/premium_photo-1679852311180-5a76e6e051c7?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Femmes dans l'artisanat marocain" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Artisanat Marocain : Patrimoine et Innovation</h3>
+            <p>L'artisanat marocain est profondément enraciné dans la culture et le patrimoine du pays, représentant une source de fierté ...</p>
+            <span class="date">11 Nov 2024</span>
+            <button class="btn" data-id="4">Lire plus</button>
+        </div>
+        <div class="publication-card" data-id="5">
+            <img src="https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Cérémonie de thé au Maroc" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Tourisme Durable au Maroc</h3>
+            <p>Le Maroc s'engage résolument dans le développement d'un tourisme durable, en plaçant la préservation de l'environnement au ...</p>
+            <span class="date">10 Nov 2024</span>
+            <button class="btn" data-id="5">Lire plus</button>
+        </div>
+        <div class="publication-card" data-id="6">
+            <img src="https://images.unsplash.com/photo-1462899006636-339e08d1844e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Vue d'un centre financier marocain" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Casablanca Finance City : Un Pôle Financier Régional</h3>
+            <p>Casablanca Finance City (CFC) se positionne comme une passerelle stratégique pour les entreprises souhaitant accéder au ...</p>
+            <span class="date">10 Nov 2024</span>
+            <button class="btn" data-id="6">Lire plus</button>
+        </div>
+        <div class="publication-card" data-id="7">
+            <img src="https://images.unsplash.com/photo-1715198901386-cb858f1e994f?q=80&w=896&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Champs agricoles au Maroc" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Développement de l'Agriculture Durable</h3>
+            <p>L'agriculture durable est devenue une priorité pour le Maroc, avec une volonté claire d'améliorer les pratiques agricole...</p>
+            <span class="date">10 Nov 2024</span>
+            <button class="btn" data-id="7">Lire plus</button>
+        </div>
+        <div class="publication-card" data-id="8">
+            <img src="https://images.unsplash.com/photo-1600765727005-d189ea57a894?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Jeunes dans la tech au Maroc" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Écosystème des Startups Technologiques</h3>
+            <p>Le Maroc s'est imposé comme un acteur clé dans le domaine des startups technologiques, avec une scène en pleine croissa...</p>
+            <span class="date">9 Nov 2024</span>
+            <button class="btn" data-id="8">Lire plus</button>
+        </div>
+        <div class="publication-card" data-id="9">
+            <img src="https://plus.unsplash.com/premium_photo-1661880049613-2c3f89a96b5a?q=80&w=1033&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Port de Tanger Med" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px 8px 0 0; margin-bottom: 1rem;">
+            <h3>Tanger Med : Hub Logistique Africain</h3>
+            <p>Tanger Med s'affirme comme l'un des plus grands hubs logistiques et portuaires en Afrique, reliant le continent aux mar...</p>
+            <span class="date">9 Nov 2024</span>
+            <button class="btn" data-id="9">Lire plus</button>
+        </div></section>
+
+<section id="contact">
+    <h2 class="section-title">Rejoignez Notre Communauté</h2>
+    <p style="text-align: center; color: var(--accent); max-width: 600px; margin: 0 auto 3rem auto;">
+        Nous sommes là pour vous accompagner à chaque étape de votre projet. Notre équipe s'engage à répondre rapidement pour mieux comprendre vos besoins et vous orienter vers les solutions adaptées.
+        Complétez notre <a href="#banana-agreement" style="color: var(--primary); text-decoration: underline;">formulaire d'adhésion</a> pour explorer notre FAQ et consulter nos conditions générales.
+    </p>
+    <div class="contact-methods">
+        <div class="method-card">
+            <i class="fab fa-whatsapp"></i>
+            <h3>WhatsApp</h3>
+            <p>Chat et appels instantanés</p>
+            <div class="method-details">
+                Communiquez instantanément avec nos experts via WhatsApp pour des réponses rapides et des consultations vidéo
+            </div>
+        </div>
+        <div class="method-card">
+            <i class="fab fa-microsoft"></i>
+            <h3>Microsoft Teams</h3>
+            <p>Réunions professionnelles</p>
+            <div class="method-details">
+                Planifiez des réunions professionnelles via Teams pour des discussions approfondies et des présentations détaillées
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" style="max-width: 600px; margin: 0 auto 2rem auto;">
+        <label><i class="fas fa-comments"></i> Méthode de Contact Préférée</label>
+        <select name="contact-method" required>
+            <option value="">Sélectionnez...</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="teams">Microsoft Teams</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label><i class="fas fa-envelope"></i> Email Professionnel</label>
+        <input type="email" required>
+    </div>
+</div>
+<div class="form-columns">
+    <div class="form-group">
+        <label><i class="fas fa-phone"></i> Téléphone</label>
+        <input type="tel" required>
+    </div>
+
+    <div class="form-group" style="max-width: 600px; margin: 0 auto 2rem auto;">
+        <label><i class="far fa-calendar-alt"></i> Date et Heure de Contact Souhaitée - Option Principale</label>
+        <div style="display: flex; gap: 1rem;">
+            <input type="date" id="contact-date-1" required style="flex: 1;">
+            <select id="contact-time-1" required style="flex: 1;">
+                <option value="">Sélectionnez l'heure...</option>
+                <option value="13">13h00 - 14h00</option>
+                <option value="14">14h00 - 15h00</option>
+                <option value="15">15h00 - 16h00</option>
+                <option value="16">16h00 - 17h00</option>
+                <option value="17">17h00 - 18h00</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group" style="max-width: 600px; margin: 0 auto 2rem auto;">
+        <label><i class="far fa-calendar-alt"></i> Date et Heure de Contact Souhaitée - Alternative 1</label>
+        <div style="display: flex; gap: 1rem;">
+            <input type="date" id="contact-date-2" style="flex: 1;">
+            <select id="contact-time-2" style="flex: 1;">
+                <option value="">Sélectionnez l'heure...</option>
+                <option value="13">13h00 - 14h00</option>
+                <option value="14">14h00 - 15h00</option>
+                <option value="15">15h00 - 16h00</option>
+                <option value="16">16h00 - 17h00</option>
+                <option value="17">17h00 - 18h00</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group" style="max-width: 600px; margin: 0 auto 2rem auto;">
+        <label><i class="far fa-calendar-alt"></i> Date et Heure de Contact Souhaitée - Alternative 2</label>
+        <div style="display: flex; gap: 1rem;">
+            <input type="date" id="contact-date-3" style="flex: 1;">
+            <select id="contact-time-3" style="flex: 1;">
+                <option value="">Sélectionnez l'heure...</option>
+                <option value="13">13h00 - 14h00</option>
+                <option value="14">14h00 - 15h00</option>
+                <option value="15">15h00 - 16h00</option>
+                <option value="16">16h00 - 17h00</option>
+                <option value="17">17h00 - 18h00</option>
+            </select>
+        </div>
+<br></br>
+    <div class="form-group" style="max-width: 600px; margin: 0 auto 2rem auto;">
+        <label><i class="fas fa-pen"></i> Message</label>
+        <textarea rows="5" placeholder="Décrivez votre projet ou vos besoins..." required></textarea>
+    </div>
+
+    <div class="form-group" style="max-width: 600px; margin: 0 auto 2rem auto; text-align: center;">
+        <button type="submit" class="btn">Envoyer</button>
+    </div>
+
+    <h2 class="section-title2" id="banana-agreement">Partner Agreement</h2>
+    <p style="text-align: center; color: var(--accent); max-width: 600px; margin: 0 auto 3rem auto;">
+        Pour aller plus loin, remplissez notre formulaire d'adhésion afin de nous soumettre une version préliminaire de votre contrat. Vous recevrez ensuite une copie au format PDF à vérifier, signer et nous renvoyer pour valider votre engagement. Cette démarche garantit un suivi rigoureux et transparent de votre collaboration avec nous. Veuillez noter que le contrat ne prendra effet qu'à la réception de la version signée et n'engage pas le partenaire tant qu'il n'est pas finalisé.    </p>
+    <form class="contact-form">
+        <div class="form-group">
+            <label><i class="fas fa-user"></i> Contact Principal</label>
+            <input type="text" required>
+        </div>
+        <div class="form-columns">
+            <div class="form-group">
+                <label><i class="fas fa-building"></i> Nom de l'entreprise</label>
+                <input type="text">
+            </div>
+            <button type="button" class="btn" id="accessDraftButton">Accéder au draft</button>    </form>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="social-links">
+            <button class="social-link" onclick="handleShare('facebook')">
+                <i class="fab fa-facebook"></i>
+            </button>
+            <button class="social-link" onclick="handleShare('twitter')">
+                <i class="fab fa-twitter"></i>
+            </button>
+            <button class="social-link" onclick="handleShare('linkedin')">
+                <i class="fab fa-linkedin"></i>
+            </button>
+            <button class="social-link" onclick="handleShare('instagram')">
+                <i class="fab fa-instagram"></i>
+            </button>
+            <button class="social-link" onclick="handleShare('whatsapp')">
+                <i class="fab fa-whatsapp"></i>
+            </button>
+        </div>
+    </div>
+</footer>
+
+<div class="chat-toggle">
+    <i class="fas fa-comments"></i>
+</div>
+
+<div class="chat-box">
+    <div class="chat-header">
+        <span>Chat with us</span>
+        <i class="fas fa-times" id="close-chat"></i>
+    </div>
+    <div class="chat-messages">
+        <div style="padding: 10px;">Hello! How can we help you today?</div>
+    </div>
+    <div class="chat-input">
+        <input type="text" placeholder="Type your message...">
+        <button class="btn" style="padding: 0.5rem 1rem;"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<script>
+// Hamburger menu
+document.querySelector('.hamburger').addEventListener('click', function() {
+    document.querySelector('.nav-menu').classList.toggle('active');
+});
+
+// Logo click handler to show welcome/hero page
+document.querySelector('.logo').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Show hero section
+    document.querySelector('.hero').style.display = 'flex';
+    
+    // Hide all other sections
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Smooth scroll to top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Replace the nav-links href="#" with data-section attributes
+const navLinks = document.querySelectorAll('.nav-menu a').forEach(link => {
+    const section = link.getAttribute('data-section');
+    link.removeAttribute('href');
+    
+    // Update click handler
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('.nav-menu').classList.remove('active');
+        document.querySelector('.hero').style.display = 'none';
+        const sectionId = this.getAttribute('data-section');
+        showSection(sectionId);
+    });
+});
+
+// Update hero buttons
+document.querySelectorAll('.hero-content .btn').forEach(btn => {
+    const section = btn.getAttribute('data-section');
+    btn.removeAttribute('href');
+    
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('.hero').style.display = 'none';
+        const sectionId = this.getAttribute('data-section');
+        showSection(sectionId);
+    });
+});
+
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show selected section
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+        
+        // Smooth scroll to section
+        targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
+// Add global click handler for data-section elements
+document.addEventListener('click', function(e) {
+    const sectionTrigger = e.target.closest('[data-section]');
+    if (sectionTrigger) {
+        e.preventDefault();
+        const sectionId = sectionTrigger.getAttribute('data-section');
+        showSection(sectionId);
+    }
+});
+
+// Simple chat functionality
+document.querySelector('.chat-input input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && this.value.trim() !== '') {
+        const messageDiv = document.createElement('div');
+        messageDiv.style.padding = '10px';
+        messageDiv.style.textAlign = 'right';
+        messageDiv.textContent = this.value;
+        document.querySelector('.chat-messages').appendChild(messageDiv);
+        this.value = '';
+    }
+});
+
+// Chat Box Toggle
+document.querySelector('.chat-toggle').addEventListener('click', function() {
+    document.querySelector('.chat-box').style.display = 'block';
+    this.style.display = 'none';
+});
+
+document.querySelector('#close-chat').addEventListener('click', function() {
+    document.querySelector('.chat-box').style.display = 'none';
+    document.querySelector('.chat-toggle').style.display = 'flex';
+});
+
+// Set up date restrictions and available dates
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle all three date inputs
+    ['contact-date-1', 'contact-date-2', 'contact-date-3'].forEach(dateInputId => {
+        const dateInput = document.getElementById(dateInputId);
+        
+        // Set minimum date to today
+        const today = new Date();
+        const minDate = today.toISOString().split('T')[0];
+        dateInput.min = minDate;
+        
+        // Set maximum date to 3 months from now
+        const maxDate = new Date();
+        maxDate.setMonth(maxDate.getMonth() + 3);
+        dateInput.max = maxDate.toISOString().split('T')[0];
+        
+        // Example of available dates (you can modify this array as needed)
+        const availableDates = [];
+        let currentDate = new Date();
+        
+        // Generate available dates (e.g., only business days for next 3 months)
+        while (currentDate <= maxDate) {
+            if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) { // Exclude weekends
+                availableDates.push(new Date(currentDate).toISOString().split('T')[0]);
+            }
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        
+        // Validate selected date
+        dateInput.addEventListener('input', function(e) {
+            const selectedDate = e.target.value;
+            if (!availableDates.includes(selectedDate)) {
+                e.target.value = '';
+                
+                // Create and show error modal
+                const errorModal = document.createElement('div');
+                errorModal.className = 'error-modal';
+                errorModal.innerHTML = `
+                    <div class="error-modal-content">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">
+                            <i class="fas fa-exclamation-circle"></i> Date Non Disponible
+                        </h3>
+                        <p>Cette date n'est pas disponible. Veuillez sélectionner une autre date.</p>
+                        <button class="btn">OK</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(errorModal);
+                errorModal.style.display = 'block';
+                
+                // Close modal on button click
+                errorModal.querySelector('.btn').onclick = function() {
+                    errorModal.remove();
+                };
+                
+                // Close modal on outside click
+                errorModal.onclick = function(event) {
+                    if (event.target === errorModal) {
+                        errorModal.remove();
+                    }
+                };
+            }
+        });
+    });
+
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const expertCards = document.querySelectorAll('.expert-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            const filterValue = button.getAttribute('data-filter');
+            
+            expertCards.forEach(card => {
+                if (filterValue === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    if (card.getAttribute('data-category').includes(filterValue)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+
+
+    // Redirect to partners page contracts
+
+    document.getElementById('accessDraftButton').addEventListener('click', function() {
+    window.location.href = 'partner.html';
+  });
+
+    // Récoltes search functionality
+    document.getElementById('recoltes-search').addEventListener('input', function(e) {
+        const searchText = e.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.publication-card');
+        const noResults = document.getElementById('no-results');
+        const suggestions = document.getElementById('suggestions');
+        let foundResults = false;
+        
+        // Get all available topics from cards with their categories
+        const allTopics = Array.from(cards).map(card => ({
+            title: card.querySelector('h3').textContent.toLowerCase(),
+            category: card.querySelector('p').textContent.toLowerCase()
+        }));
+        
+        cards.forEach(card => {
+            const cardContent = card.textContent.toLowerCase();
+            const shouldShow = searchText.split(' ').every(word => 
+                cardContent.includes(word.trim())
+            );
+            
+            if (shouldShow) {
+                foundResults = true;
+            }
+            
+            card.style.display = shouldShow ? 'block' : 'none';
+            card.style.opacity = shouldShow ? '1' : '0';
+            card.style.transform = shouldShow ? 'scale(1)' : 'scale(0.8)';
+        });
+        
+        // Handle no results case
+        if (!foundResults && searchText.trim() !== '') {
+            noResults.style.display = 'block';
+            
+            // Generate more diverse suggestions based on different categories
+            let suggestedTopics = [];
+            const searchWords = searchText.toLowerCase().split(' ');
+            
+            // Look for partial matches in different categories
+            const categories = ['innovation', 'bio', 'technique', 'climatique', 'certification'];
+            categories.forEach(category => {
+                const topicsInCategory = allTopics.filter(topic => 
+                    topic.category.includes(category) &&
+                    !suggestedTopics.includes(topic.title) &&
+                    searchWords.some(word => 
+                        topic.title.includes(word) || 
+                        topic.category.includes(word)
+                    )
+                );
+                
+                if (topicsInCategory.length > 0) {
+                    suggestedTopics.push(topicsInCategory[0].title);
+                }
+            });
+            
+            // If we don't have enough suggestions, add some random ones from different categories
+            while (suggestedTopics.length < 3) {
+                const randomTopic = allTopics[Math.floor(Math.random() * allTopics.length)];
+                if (!suggestedTopics.includes(randomTopic.title)) {
+                    suggestedTopics.push(randomTopic.title);
+                }
+            }
+            
+            // Limit to 3 suggestions
+            suggestedTopics = suggestedTopics.slice(0, 3);
+            
+            // Populate suggestions
+            suggestions.innerHTML = suggestedTopics.map(topic => 
+                `<button class="filter-btn" onclick="document.getElementById('recoltes-search').value='${topic}'; 
+                 document.getElementById('recoltes-search').dispatchEvent(new Event('input'))">
+                    ${topic}
+                </button>`
+            ).join('');
+        } else {
+            noResults.style.display = 'none';
+        }
+    });
+
+// Modal functionality
+
+    document.querySelectorAll('.solution-card .btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const solutionType = this.closest('.solution-card').querySelector('h3').textContent;
+            showSolutionModal(solutionType);
+        });
+    });
+
+    document.querySelectorAll('.expert-card .btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const expertName = this.closest('.expert-card').querySelector('h3').textContent;
+            showExpertModal(expertName);
+        });
+    });
+
+// Publication modal functionality
+    document.querySelectorAll('.publication-card').forEach(card => {
+        const btn = card.querySelector('.btn');
+        const publicationId = card.getAttribute('data-id');
+        if (!btn) return;
+        
+        if (!publicationId) return;
+        
+        btn.onclick = function() {
+            showPublicationModal(publicationId);
+        };
+    });
+
+    function showExpertModal(expertName) {
+        const modalContent = getExpertContent(expertName);
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                ${modalContent}
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        modal.style.display = 'block';
+        
+        modal.querySelector('.modal-close').onclick = function() {
+            modal.remove();
+        };
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.remove();
+            }
+        };
+    }
+
+// Experts Details for each profile  
+
+    function getExpertContent(expertName) {
+const experts = {
+'Alban': {
+            title: 'Spécialiste Tests Automatisés & Optimisation des Processus',
+            experience: '15 ans',
+            skills: ['Automatisation des tests', 'Optimisation des processus', 'Qualité logicielle'],
+            tools: ['Systèmes d\'automatisation', 'Outils de gestion de flux', 'Logiciels de tests'],
+            descriptif: 'Avec plus de 15 ans d\'expérience, Alban se distingue par son expertise en automatisation des tests et l\'optimisation des processus métiers. Il conçoit des solutions sur mesure pour maximiser la qualité logicielle tout en minimisant les coûts et délais. Passionné par l\'amélioration continue, il accompagne les entreprises dans la transformation digitale en intégrant des systèmes de tests performants. Son parcours témoigne d\'une profonde connaissance technique et d\'une volonté d\'innover.',
+            education: [
+                'Master en Génie Logiciel',
+                'Certificat en Tests Avancés'
+            ],
+            certifications: [
+                'Certification ISTQB',
+                'Expert en Automatisation'
+            ],
+            projects: [
+                'Mise en place de systèmes automatisés',
+                'Optimisation de processus en entreprise',
+                'Formation en tests logiciels'
+            ],
+            secondaryProjects: [
+                'Analyse de performances',
+                'Études d\'efficience des workflows',
+                'Amélioration continue des processus'
+            ]
+        },
+        'Bernard': {
+            title: 'Expert Planification & Structuration d\'Affaires',
+            experience: '12 ans',
+            skills: ['Recherche économique', 'Planification stratégique', 'Rédaction de business plans'],
+            tools: ['Logiciels de modélisation financière', 'Outils de planification', 'Systèmes de gestion d\'entreprise'],
+            descriptif: 'Bernard possède une vaste expérience en structuration de plans d\'affaires et en recherche stratégique, développée sur plus de 12 ans. Il aide les entreprises à concevoir des stratégies gagnantes pour maximiser leur potentiel de croissance. Fort de compétences en modélisation économique et en rédaction détaillée, il se distingue par sa capacité à transformer des idées en plans concrets. Sa passion est de guider les entrepreneurs vers la réussite avec des solutions adaptées.',
+            education: [
+                'Master en Gestion d\'Entreprises',
+                'Licence en Économie'
+            ],
+            certifications: [
+                'Certification en Planification Stratégique',
+                'Expertise en Études de Marché'
+            ],
+            projects: [
+                'Rédaction de plans d\'affaires',
+                'Structuration de nouvelles entreprises',
+                'Analyses de faisabilité'
+            ],
+            secondaryProjects: [
+                'Études de marché approfondies',
+                'Propositions de financement',
+                'Ateliers de développement économique'
+            ]
+        },
+        'Charles': {
+            title: 'Développeur Web & Expert SEO',
+            experience: '10 ans',
+            skills: ['Développement web', 'Optimisation SEO', 'Sécurité des plateformes'],
+            tools: ['Frameworks web', 'Outils d\'analyse SEO', 'Systèmes de gestion de contenu'],
+            descriptif: 'Charles est un expert du développement web et de l\'optimisation SEO, avec une expérience de 10 ans dans la création de sites performants. Il conçoit des plateformes sécurisées et intuitives qui allient performances techniques et visibilités optimales sur les moteurs de recherche. Son engagement envers l\'innovation et la sécurité garantit à ses clients une expérience digitale unique, adaptée aux exigences du marché actuel.',
+            education: [
+                'Licence en Informatique',
+                'Certification en Développement Web'
+            ],
+            certifications: [
+                'Certification SEO Avancée',
+                'Expertise en Développement Web Sécurisé'
+            ],
+            projects: [
+                'Développement de plateformes sécurisées',
+                'Optimisation de sites pour les moteurs de recherche',
+                'Refonte de sites internet'
+            ],
+            secondaryProjects: [
+                'Audits de performances web',
+                'Consultations en SEO',
+                'Formations en création de contenu'
+            ]
+        },
+        'Daniel': {
+            title: 'Spécialiste Collecte & Analyse de Données de Marché',
+            experience: '8 ans',
+            skills: ['Collecte de données', 'Analyse de marché', 'Gestion de terrains'],
+            tools: ['Outils d\'enquête', 'Logiciels de traitement de données', 'Tableaux de bord analytiques'],
+            descriptif: 'Daniel excelle dans la collecte et l\'analyse des données de marché, avec un focus particulier sur les besoins terrain. Avec 8 ans d\'expérience, il a accompagné de nombreuses organisations pour transformer les données brutes en insights stratégiques. Sa rigueur analytique, combinée à une connaissance terrain pointue, permet de créer des solutions adaptées et pragmatiques, optimisant les prises de décision à haut impact.',
+            education: [
+                'Master en Analyse de Données',
+                'Licence en Statistiques'
+            ],
+            certifications: [
+                'Certification en Intelligence de Marché',
+                'Expertise en Gestion de Données'
+            ],
+            projects: [
+                'Collectes de données terrain',
+                'Études de marché',
+                'Analyses statistiques avancées'
+            ],
+            secondaryProjects: [
+                'Création de bases de données clients',
+                'Formation en traitement de données',
+                'Études sur les comportements des consommateurs'
+            ]
+        },
+        'Elia': {
+            title: 'Expert Acquisition de Données & Études Stratégiques',
+            experience: '9 ans',
+            skills: ['Acquisition de données', 'Études stratégiques', 'Analyse de marché'],
+            tools: ['Bases de données', 'Outils de collecte de données', 'Systèmes d\'analyse prédictive'],
+            descriptif: 'Elia possède une expertise de 9 ans dans l\'acquisition de données de haute précision pour les études stratégiques. Il aide les entreprises à structurer des analyses complètes pour des décisions éclairées. Passionné par l\'innovation et les tendances du marché, il offre un accompagnement adapté à chaque défi stratégique. Son parcours illustre une rigueur analytique et une vision tournée vers l\'avenir.',
+            education: [
+                'Master en Stratégie d\'Entreprise',
+                'Licence en Analyse Économique'
+            ],
+            certifications: [
+                'Certification en Études Stratégiques',
+                'Expert en Gestion des Données'
+            ],
+            projects: [
+                'Acquisition de données marché',
+                'Études de cas sectoriels',
+                'Analyses de risques'
+            ],
+            secondaryProjects: [
+                'Études de marché spécifiques',
+                'Développement de solutions innovantes',
+                'Analyse concurrentielle approfondie'
+            ]
+        },
+        'Fred': {
+            title: 'Spécialiste Comptabilité & Fiscalité',
+            experience: '14 ans',
+            skills: ['Comptabilité', 'Fiscalité', 'Gestion financière'],
+            tools: ['Logiciels comptables', 'Systèmes de reporting', 'Outils de gestion fiscale'],
+            descriptif: 'Avec 14 ans d\'expertise, Fred est reconnu pour ses compétences en comptabilité et fiscalité. Il aide les entreprises à optimiser leur gestion financière, tout en garantissant la conformité fiscale et réglementaire. Son approche orientée résultats lui permet de proposer des solutions concrètes et adaptées, que ce soit pour les rapports financiers complexes ou la gestion fiscale pointue. Il s\'engage à soutenir ses clients de manière proactive.',
+            education: [
+                'Master en Comptabilité et Gestion Financière',
+                'Diplôme en Audit'
+            ],
+            certifications: [
+                'Expert-Comptable Diplômé',
+                'Spécialisation en Fiscalité'
+            ],
+            projects: [
+                'Élaboration de rapports financiers',
+                'Gestion de la conformité fiscale',
+                'Optimisation comptable'
+            ],
+            secondaryProjects: [
+                'Formations en comptabilité',
+                'Consultations fiscales',
+                'Audits d\'entreprise'
+            ]
+        },
+        'Gaelle': {
+            title: 'Spécialiste Formalités Administratives & Conformité',
+            experience: '11 ans',
+            skills: ['Gestion administrative', 'Conformité réglementaire', 'Optimisation des procédures'],
+            tools: ['Systèmes de gestion documentaire', 'Outils de conformité', 'Logiciels de workflow'],
+            descriptif: 'Gaelle, forte de ses 11 ans d\'expérience, assure une gestion fluide des formalités administratives et une conformité irréprochable aux réglementations. Ses compétences permettent de simplifier les procédures complexes et de garantir une conformité constante. Passionnée par la structuration efficace des processus, elle aide les entreprises à se concentrer sur leur cœur d\'activité, tout en restant conformes.',
+            education: [
+                'Master en Droit Administratif',
+                'Licence en Gestion'
+            ],
+            certifications: [
+                'Certification en Gestion Administrative',
+                'Expertise en Conformité'
+            ],
+            projects: [
+                'Optimisation des procédures administratives',
+                'Conformité locale',
+                'Support aux entreprises'
+            ],
+            secondaryProjects: [
+                'Audits de conformité',
+                'Formation des collaborateurs',
+                'Développement de processus'
+            ]
+        },
+        'Henri': {
+            title: 'Spécialiste en Stratégies Marketing Personnalisées',
+            experience: '13 ans',
+            skills: ['Marketing stratégique', 'Campagnes sur mesure', 'Optimisation de la communication'],
+            tools: ['Outils d\'analyse marketing', 'Logiciels de CRM', 'Systèmes de gestion de campagnes'],
+            descriptif: 'Henri est un expert en marketing stratégique et campagnes sur mesure depuis plus de 13 ans. Il développe des stratégies adaptées pour maximiser la visibilité et l\'impact des entreprises sur leurs cibles. Avec une maîtrise fine des outils marketing modernes, il apporte une touche personnalisée à chaque projet pour une communication optimale. Son objectif est de renforcer le lien entre les marques et leurs publics.',
+            education: [
+                'Master en Marketing et Communication',
+                'Diplôme en Publicité'
+            ],
+            certifications: [
+                'Spécialisation en Marketing Digital',
+                'Certification en Publicité Créative'
+            ],
+            projects: [
+                'Développement de campagnes publicitaires',
+                'Stratégies de marque',
+                'Optimisation de contenu'
+            ],
+            secondaryProjects: [
+                'Formation des équipes marketing',
+                'Analyse de performances',
+                'Création de guides de communication'
+            ]
+        },
+        'Ilyas': {
+            title: 'Spécialiste Stratégie Digitale & Optimisation de Marque',
+            experience: '10 ans',
+            skills: ['Stratégie digitale', 'Optimisation de marque', 'Communication ciblée'],
+            tools: ['Outils de marketing digital', 'Systèmes d\'analyse de performance', 'CRM'],
+            descriptif: 'Depuis 10 ans, Ilyas accompagne les entreprises dans leur stratégie digitale et l\'optimisation de leur marque. Il aide à bâtir une identité forte et une visibilité accrue, grâce à des campagnes de communication ciblées et une présence digitale impactante. Sa passion pour l\'innovation numérique et l\'engagement de marque assure à ses clients des solutions créatives et performantes, axées sur les résultats.',
+            education: [
+                'Master en Stratégie Digitale',
+                'Licence en Communication'
+            ],
+            certifications: [
+                'Spécialisation en Stratégie de Marque',
+                'Certification en Communication Digitale'
+            ],
+            projects: [
+                'Stratégies digitales personnalisées',
+                'Campagnes de visibilité',
+                'Optimisation de marques'
+            ],
+            secondaryProjects: [
+                'Consultations en communication',
+                'Création de contenu ciblé',
+                'Analyse d\'engagements'
+            ]
+        }
+    };
+        const expert = experts[expertName] || {
+            title: '',
+            experience: '',
+            skills: [''],
+            tools: [''],
+            descriptif: '',
+            education: [''],
+            certifications: [''],
+            projects: [''],
+            secondaryProjects: ['']
+        };
+
+        return `
+            <div class="modal-header">
+                <h2>${expertName}</h2>
+                <p>${expert.title}</p>
+                <p><i class="fas fa-clock"></i> ${expert.experience} d'expérience</p>
+            </div>
+            <div class="modal-body">
+                <div class="profile-section" style="margin: 2rem 0;">
+                    <h3><i class="fas fa-user-circle"></i> Descriptif</h3>
+                    <p style="line-height: 1.6; color: var(--accent);">${expert.descriptif}</p>
+                </div>
+
+                <div class="expert-profile-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin: 2rem 0;">
+                    <div class="profile-section">
+                        <h3><i class="fas fa-tools"></i> Compétences</h3>
+                        <ul class="advantage-list">
+                            ${expert.skills.map(skill => `
+                                <li><i class="fas fa-check"></i> ${skill}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="profile-section">
+                        <h3><i class="fas fa-laptop"></i> Outils Maîtrisés</h3>
+                        <ul class="advantage-list">
+                            ${expert.tools.map(tool => `
+                                <li><i class="fas fa-check"></i> ${tool}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="profile-section">
+                        <h3><i class="fas fa-certificate"></i> Certifications</h3>
+                        <ul class="advantage-list">
+                            ${expert.certifications.map(cert => `
+                                <li><i class="fas fa-check"></i> ${cert}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="profile-section">
+                        <h3><i class="fas fa-graduation-cap"></i> Formation</h3>
+                        <ul class="advantage-list">
+                            ${expert.education.map(edu => `
+                                <li><i class="fas fa-check"></i> ${edu}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="profile-section">
+                        <h3><i class="fas fa-project-diagram"></i> Projets Principaux</h3>
+                        <ul class="advantage-list">
+                            ${expert.projects.map(project => `
+                                <li><i class="fas fa-check"></i> ${project}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="profile-section">
+                        <h3><i class="fas fa-tasks"></i> Projets Secondaires</h3>
+                        <ul class="advantage-list">
+                            ${(expert.secondaryProjects || ['Projets en cours']).map(project => `
+                                <li><i class="fas fa-check"></i> ${project}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-section="contact">Contracter ${expertName}</button>
+            </div>
+        `;
+    }
+
+    function showSolutionModal(solutionType) {
+        const solutionContent = getSolutionContent(solutionType);
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                ${solutionContent}
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        modal.style.display = 'block';
+        
+        modal.querySelector('.modal-close').onclick = function() {
+            modal.remove();
+        };
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.remove();
+            }
+        };
+    }
+
+    function getSolutionContent(solutionType) {
+        const solutions = {
+'Consulting Stratégique': {
+        description: 'Le conseil en stratégie de Morocco Ventures Network aide ses partenaires à améliorer leur compétitivité, croissance et rentabilité en offrant une analyse approfondie des forces internes et des tendances externes du marché. Grâce à des données précises et des insights sectoriels, MVN identifie les opportunités de différenciation et les leviers de performance. En optimisant les choix stratégiques, MVN permet aux entreprises de s’adapter aux évolutions du marché et de maximiser l’efficacité de leurs ressources favorisant ainsi une croissance durable et une rentabilité accrue.',
+        advantages: [
+            'Élaboration de stratégies de croissance personnalisées',
+            'Optimisation des opérations et des processus',
+            'Études de faisabilité et business plans',
+            'Support stratégique pour la pénétration de marché'
+        ],
+        tools: [
+            'Outils de diagnostic stratégique',
+            'Analyses SWOT détaillées',
+            'Études sectorielles approfondies',
+            'Modèles financiers'
+        ],
+        pricing: [
+            {
+                name: 'Basic',
+                price: '2250€',
+                features: ['Analyse initiale', 'Rapport simplifié', 'Consultation de 8 heures']
+            },
+            {
+                name: 'Pro',
+                price: '5250€',
+                features: ['Étude approfondie', 'Plan stratégique détaillé', 'Suivi sur 3 mois', 'Support personnalisé']
+            },
+            {
+                name: 'Enterprise',
+                price: 'Sur mesure',
+                features: ['Solutions stratégiques personnalisées', 'Suivi continu', 'Support étendu', 'Formation']
+            }
+        ]
+    }            ,
+            'R&D et Innovation': {
+    description: 'Le service de recherche et développement de Morocco Ventures Network (MVN) aide les entreprises à maximiser leur innovation et leur compétitivité en identifiant de nouvelles opportunités technologiques et en améliorant les processus existants. En combinant une veille technologique continue et une approche analytique, MVN soutient ses partenaires dans la création de produits et services novateurs qui répondent aux besoins du marché. Ce processus favorise l’adaptation rapide aux évolutions sectorielles et optimise les capacités d’innovation, permettant ainsi aux entreprises de se démarquer et de renforcer leur position sur le marché.',
+    advantages: [
+        'Développement de nouveaux produits et services',
+        'Optimisation des processus innovants',
+        'Collaboration avec des partenaires stratégiques',
+        'Veille technologique'
+    ],
+    tools: [
+        'Solutions de prototypage',
+        'Outils d\'analyse technologique',
+        'Logiciels de gestion de projet',
+        'Accès aux réseaux d\'experts'
+    ],
+    pricing: [
+        {
+            name: 'Starter',
+            price: '3000€',
+            features: ['Analyse initiale', 'Rapport succinct', 'Support ponctuel']
+        },
+        {
+            name: 'Growth',
+            price: '6750€',
+            features: ['Plan d\'innovation complet', 'Support continu', 'Ateliers et formations']
+        },
+        {
+            name: 'Custom',
+            price: 'Sur mesure',
+            features: ['Projet personnalisé', 'Accès illimité aux ressources', 'Support intensif']
+        }
+    ]
+}
+,
+            'Soutien Administratif': {
+    description: 'Les services de support de Morocco Ventures Network (MVN) accompagnent les entreprises dans l’enregistrement, la conformité réglementaire et la gestion administrative. MVN simplifie le processus d’enregistrement en assurant la conformité avec les exigences locales et internationales, et en facilitant les démarches administratives. Grâce à une expertise approfondie des réglementations marocaines, MVN permet aux entreprises de naviguer facilement dans le cadre légal, d’éviter les obstacles juridiques et de se concentrer sur leur développement tout en respectant les normes en vigueur.',
+    advantages: [
+        'Simplification des démarches administratives',
+        'Conformité avec les régulations locales',
+        'Assistance à la création d\'entreprises',
+        'Gestion documentaire'
+    ],
+    tools: [
+        'Systèmes de gestion des documents',
+        'Plateformes de suivi des démarches',
+        'Guides réglementaires',
+        'Portails administratifs'
+    ],
+    pricing: [
+        {
+            name: 'Starter',
+            price: '2000€',
+            features: ['Enregistrement de base', 'Support ponctuel', 'Rapport initial']
+        },
+        {
+            name: 'Growth',
+            price: '4500€',
+            features: ['Gestion complète des formalités', 'Suivi sur 6 mois', 'Support étendu']
+        },
+        {
+            name: 'Custom',
+            price: 'Sur mesure',
+            features: ['Solution personnalisée', 'Support continu', 'Optimisation des démarches']
+        }
+    ]
+}
+            ,
+            'Data & Veille': {
+    description: 'Le service de collecte et d’analyse de données de Morocco Ventures Network (MVN) aide les entreprises à prendre des décisions stratégiques éclairées et à optimiser leurs performances. En recueillant des données précises et pertinentes, MVN offre des insights détaillés sur les tendances du marché, les comportements des consommateurs et les performances internes. Cette approche analytique permet d’identifier les leviers de croissance, de surveiller l’efficacité des stratégies en place et d’adapter les actions en temps réel pour maximiser les résultats et la rentabilité à long terme.',
+    advantages: [
+        'Veille sectorielle régulière',
+        'Accès à des bases de données exclusives',
+        'Indicateurs de performance clés (KPI)',
+        'Rapports sur mesure'
+    ],
+    tools: [
+        'Tableaux de bord interactifs',
+        'Outils de visualisation de données',
+        'Systèmes de veille automatisés',
+        'Analyses statistiques avancées'
+    ],
+    pricing: [
+        {
+            name: 'Basic',
+            price: '2250€',
+            features: ['Analyse initiale de données', 'Rapport simplifié', 'Accès à des KPI standards']
+        },
+        {
+            name: 'Advanced',
+            price: '5000€',
+            features: ['Rapports détaillés', 'Veille sectorielle en continu', 'Support analytique']
+        },
+        {
+            name: 'Custom',
+            price: 'Sur mesure',
+            features: ['Solutions sur mesure', 'Accès total aux données', 'Support analytique intensif']
+        }
+    ]
+}
+            ,
+            'Mise en Relation': {
+    description: 'Les services de mise en relation stratégique de Morocco Ventures Network (MVN) facilitent le développement de partenariats et l’accès à des opportunités clés. En s’appuyant sur un réseau étendu et des connexions locales et internationales, MVN connecte ses partenaires avec des acteurs stratégiques dans divers secteurs. Ce service permet aux entreprises de renforcer leur position sur le marché, de développer des collaborations fructueuses et d’exploiter des opportunités de croissance, tout en maximisant leur accès aux ressources nécessaires pour réussir.',
+    advantages: [
+        'Accès à un réseau d\'experts',
+        'Événements de réseautage',
+        'Mise en relation avec partenaires',
+        'Support de suivi'
+    ],
+    tools: [
+        'Portails de networking',
+        'Événements en ligne',
+        'Bases de contacts professionnels',
+        'Outils de gestion de relations'
+    ],
+    pricing: [
+        {
+            name: 'Basic',
+            price: '1500€',
+            features: ['Accès à des contacts clés', 'Support ponctuel']
+        },
+        {
+            name: 'Growth',
+            price: '4000€',
+            features: ['Réseautage stratégique', 'Support continu', 'Accès à des événements exclusifs']
+        },
+        {
+            name: 'Custom',
+            price: 'Sur mesure',
+            features: ['Plan de mise en relation personnalisé', 'Accès total aux ressources']
+        }
+    ]
+}
+            ,
+            'Financement': {
+    description: 'Les solutions de financement et de subventions de Morocco Ventures Network (MVN) offrent un soutien crucial pour stimuler la croissance et optimiser les investissements. MVN aide ses partenaires à identifier et à accéder à des sources de financement adaptées, qu’il s’agisse de subventions publiques, de financements privés ou de prêts d’investissement. Ces solutions permettent aux entreprises de sécuriser les ressources nécessaires pour accélérer leur développement, améliorer leur rentabilité et investir dans des projets stratégiques, tout en optimisant la gestion de leurs fonds.',
+    advantages: [
+        'Aide à la levée de fonds',
+        'Conseil pour l\'obtention de subventions',
+        'Structuration financière',
+        'Optimisation fiscale'
+    ],
+    tools: [
+        'Modèles financiers',
+        'Outils d\'évaluation',
+        'Guides de subventions',
+        'Outils de planification financière'
+    ],
+    pricing: [
+        {
+            name: 'Basic',
+            price: '2750€',
+            features: ['Analyse de faisabilité', 'Plan de financement de base']
+        },
+        {
+            name: 'Advanced',
+            price: '6000€',
+            features: ['Dossier complet de financement', 'Support pour la levée de fonds']
+        },
+        {
+            name: 'Custom',
+            price: 'Sur mesure',
+            features: ['Solution sur mesure', 'Support continu']
+        }
+    ]
+}
+            ,
+            'Communication & Marketing': {
+    description: 'Les stratégies de communication et les campagnes marketing de Morocco Ventures Network (MVN) sont conçues pour maximiser l’impact et la présence des entreprises sur le marché. MVN aide ses partenaires à élaborer des plans de communication sur mesure, en utilisant des approches multicanal adaptées à leur public cible. Grâce à une expertise en branding, en marketing digital et en gestion de campagnes, MVN optimise la visibilité de ses partenaires, renforce leur positionnement sur le marché et génère une meilleure interaction avec leurs partenaires, contribuant ainsi à une croissance soutenue et à un retour sur investissement élevé.',
+    advantages: [
+        'Création de campagnes digitales',
+        'Stratégies de branding',
+        'Gestion de la réputation',
+        'Optimisation de la communication'
+    ],
+    tools: [
+        'Outils de marketing digital',
+        'Plateformes de gestion de contenu',
+        'Solutions de SEO',
+        'Réseaux sociaux'
+    ],
+    pricing: [
+        {
+            name: 'Basic',
+            price: '2500€',
+            features: ['Campagne de base', 'Consultation stratégique']
+        },
+        {
+            name: 'Pro',
+            price: '5500€',
+            features: ['Stratégie de marque complète', 'Campagnes digitales avancées']
+        },
+        {
+            name: 'Custom',
+            price: 'Sur mesure',
+            features: ['Solution intégrée', 'Support continu']
+        }
+    ]
+}
+            // Add similar objects for other solutions
+        };
+
+        const solution = solutions[solutionType] || {
+            description: 'Solution agricole innovante',
+            advantages: ['Avantages personnalisés'],
+            tools: ['Outils modernes'],
+            pricing: [{
+                name: 'Standard',
+                price: 'Sur demande',
+                features: ['Caractéristiques personnalisées']
+            }]
+        };
+
+        return `
+            <div class="modal-header">
+                <h2>${solutionType}</h2>
+                <p>${solution.description}</p>
+            </div>
+            <div class="modal-body">
+                <div class="solution-details">
+                    <div class="detail-card">
+                        <h3><i class="fas fa-star"></i> Avantages</h3>
+                        <ul class="advantage-list">
+                            ${solution.advantages.map(adv => `
+                                <li><i class="fas fa-check"></i> ${adv}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h3><i class="fas fa-tools"></i> Outils et Technologies</h3>
+                        <ul class="advantage-list">
+                            ${solution.tools.map(tool => `
+                                <li><i class="fas fa-check"></i> ${tool}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin: 2rem 0;">Tarification</h3>
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Formule</th>
+                            <th>Prix</th>
+                            <th>Caractéristiques</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${solution.pricing.map(price => `
+                            <tr>
+                                <td>${price.name}</td>
+                                <td>${price.price}</td>
+                                <td>
+                                    <ul class="advantage-list">
+                                        ${price.features.map(feature => `
+                                            <li><i class="fas fa-check"></i> ${feature}</li>
+                                        `).join('')}
+                                    </ul>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-section="contact">Demander une offre</button>
+            </div>
+        `;
+    }
+
+    // Publication modal functionality
+    function showPublicationModal(publicationId) {
+        const publicationContent = getPublicationContent(publicationId);
+        
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                ${publicationContent}
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        modal.style.display = 'block';
+        
+        modal.querySelector('.modal-close').onclick = function() {
+            modal.remove();
+        };
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.remove();
+            }
+        };
+    }
+
+    function getPublicationContent(publicationId) {
+        const publications = {
+            1: {
+        title: "Le Maroc : Destination Privilégiée pour les Investissements Étrangers",
+        date: "12 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+                <h2>Un Écosystème Favorable aux Investissements</h2>
+                <p>Le Maroc s'est positionné comme une destination stratégique pour les investisseurs étrangers, attirant l'attention des entreprises européennes et américaines grâce à une politique économique ambitieuse et un environnement d'affaires attractif. Avec des réformes structurelles et une ouverture accrue aux échanges commerciaux, le Royaume offre des opportunités uniques dans des secteurs diversifiés tels que l'industrie, l'agriculture, la finance et les technologies numériques. L'adhésion à des accords de libre-échange, notamment avec l'Union européenne et les États-Unis, renforce sa capacité à servir de passerelle entre l'Afrique, l'Europe et l'Amérique, tout en offrant des incitations fiscales et réglementaires avantageuses pour les investisseurs.</p>
+                
+                <h2>Des Infrastructures Modernes et Connectées</h2>
+                <p>Le Maroc a considérablement investi dans ses infrastructures, avec des projets tels que Tanger Med, le plus grand port d'Afrique, et Casablanca Finance City, un pôle financier régional destiné à faciliter l'accès au marché africain pour les multinationales. Ces infrastructures modernes, combinées à des zones franches et des parcs industriels, renforcent la compétitivité du pays et attirent des capitaux étrangers. De plus, le développement des routes, des chemins de fer et des réseaux de télécommunications de dernière génération permet au Maroc de rester à la pointe de l'efficacité logistique et de l'innovation.</p>
+                
+                <h2>La Stabilité Politique et Économique : Un Atout</h2>
+                <p>Le Maroc se distingue par sa stabilité politique, un facteur clé pour les investisseurs en quête de prévisibilité et de sécurité. Le gouvernement marocain a mis en place des réformes visant à améliorer le climat des affaires, à réduire les barrières administratives et à renforcer la transparence. Cette stabilité, couplée à une gouvernance proactive, fait du Maroc un havre de paix et une plateforme stratégique pour les entreprises souhaitant opérer sur le continent africain, souvent perçu comme complexe.</p>
+                
+                <h2>Un Marché en Croissance et des Consommateurs Dynamiques</h2>
+                <p>Avec une population jeune et en pleine croissance, le Maroc offre un marché de consommation dynamique. Cette démographie constitue un avantage concurrentiel, notamment pour les secteurs de la distribution, de la santé et des services. Les entreprises étrangères bénéficient d'un accès à un marché domestique en expansion, tout en utilisant le Maroc comme tremplin pour pénétrer les marchés africains voisins. Le développement de la classe moyenne et l'évolution des habitudes de consommation accentuent cette dynamique.</p>
+                
+                <h2>Les Défis à Surmonter et les Perspectives</h2>
+                <p>Malgré les nombreux atouts du Maroc, certains défis subsistent. La bureaucratie, bien qu'en amélioration, peut encore représenter un obstacle pour les investisseurs étrangers. La compétitivité du pays nécessite également de continuer à investir dans l'innovation, la formation et la productivité. Néanmoins, les perspectives de croissance restent prometteuses, et le Maroc continue de renforcer son attractivité en tant que destination d'investissement stratégique.</p>
+                
+                <h6>Sources : Ministère de l'Économie du Maroc (octobre 2024) - Financial Times (septembre 2024) - Agence Marocaine de Développement des Investissements (AMDI) (novembre 2024)</h6>
+            `;
+        }
+    },
+    2: {
+        title: "Transition Énergétique au Maroc",
+        date: "12 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+                <h2>Le Maroc : Un Modèle d'Énergies Renouvelables</h2>
+                <p>Le Maroc est reconnu comme un pionnier de la transition énergétique en Afrique, grâce à son engagement en faveur des énergies renouvelables. Le complexe solaire Noor à Ouarzazate, l'un des plus grands au monde, illustre cette ambition nationale. Avec une capacité de production d'énergie verte croissante, le Maroc se distingue par sa volonté de réduire sa dépendance aux énergies fossiles et de devenir un leader régional dans la production d'énergie solaire et éolienne. Cette transition repose sur des partenariats internationaux, attirant des investissements massifs dans les infrastructures et les technologies vertes.</p>
+                
+                <h2>Impact sur l'Économie et l'Emploi</h2>
+                <p>L'adoption des énergies renouvelables au Maroc a eu un impact significatif sur l'économie locale, créant des milliers d'emplois et dynamisant les régions rurales. Les projets d'énergie propre permettent non seulement de diversifier les sources d'énergie, mais aussi de renforcer l'autonomie énergétique du pays. L'industrie locale profite des investissements dans la chaîne d'approvisionnement des énergies renouvelables, allant de la fabrication de composants à la maintenance des installations.</p>
+                
+                <h2>Des Ambitions Régionales et Internationales</h2>
+                <p>Le Maroc aspire à devenir un exportateur net d'électricité verte vers l'Europe et les pays africains voisins. Ce positionnement stratégique, soutenu par des infrastructures de transport d'énergie performantes, renforce l'attrait du pays en tant que partenaire énergétique fiable et innovant. Les projets d'interconnexion avec les réseaux européens témoignent de cette ambition à jouer un rôle clé sur la scène internationale.</p>
+                
+                <h2>Défis de la Transition et Perspectives Futures</h2>
+                <p>Cependant, le chemin vers une transition énergétique complète n'est pas exempt de défis. La mobilisation de financements, la gestion de l'impact environnemental des projets et la formation des compétences nécessaires restent des priorités. Malgré ces enjeux, le Maroc continue d'affirmer sa position de leader, avec une vision claire de durabilité et de croissance économique.</p>
+                
+                <h2>Les Avantages pour les Investisseurs</h2>
+                <p>Pour les entreprises et les investisseurs, le Maroc offre un cadre réglementaire attractif et des opportunités uniques dans le domaine des énergies renouvelables. Les incitations fiscales, les subventions et les partenariats public-privé facilitent l'implantation et le développement de projets innovants.</p>
+                
+                <h6>Sources : Ministère de l'Énergie (septembre 2024) - Reuters (octobre 2024) - Banque Mondiale (août 2024)</h6>
+            `;
+        }
+    },
+    3: {
+        title: "Smart Cities : Le Futur Urbain du Maroc",
+        date: "11 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+                <h2>Casablanca, Pionnière des Villes Intelligentes</h2>
+                <p>Casablanca se positionne à la pointe des initiatives smart cities au Maroc. Avec des projets de digitalisation des services publics, des transports intelligents et des infrastructures connectées, la métropole aspire à améliorer la qualité de vie de ses habitants et à optimiser la gestion des ressources urbaines. Cette dynamique est soutenue par des partenariats public-privé, un cadre réglementaire favorable et des investissements conséquents, témoignant de la volonté du Maroc de s'inscrire dans la modernité.</p>
+                
+                <h2>Objectifs et Enjeux des Smart Cities</h2>
+                <p>Les smart cities au Maroc visent à promouvoir une croissance urbaine durable, à réduire l'empreinte écologique et à offrir des services publics plus efficaces. Cependant, la mise en œuvre de ces initiatives implique des investissements importants, une infrastructure technologique robuste et une coordination entre les acteurs privés et publics. L'engagement citoyen et la sécurité des données constituent également des défis majeurs à surmonter.</p>
+                
+                <h2>Exemples de Projets Innovants</h2>
+                <p>Outre Casablanca, d'autres villes marocaines telles que Rabat, Marrakech et Fès mettent en place des projets innovants pour intégrer les technologies intelligentes à leur développement urbain. Ces initiatives vont de la gestion intelligente du trafic à l'optimisation de la consommation énergétique, en passant par le développement de parcs urbains connectés et l'amélioration des réseaux de distribution d'eau et d'électricité.</p>
+                
+                <h2>Le Rôle des Investisseurs et des Partenariats</h2>
+                <p>Pour accélérer le développement des smart cities, le Maroc mise sur des investissements étrangers et des partenariats avec des entreprises technologiques. Les acteurs privés apportent leur expertise en matière d'innovation et contribuent à la transformation des infrastructures urbaines, créant ainsi des opportunités économiques et sociales significatives.</p>
+                
+                <h2>Perspectives et Défis à Long Terme</h2>
+                <p>Les perspectives pour les smart cities au Maroc sont prometteuses, mais elles nécessitent une planification rigoureuse et des financements continus. Le défi réside dans l'adaptation des technologies aux spécificités locales, tout en garantissant une gouvernance inclusive et durable.</p>
+                
+                <h6>Sources : Smart City Casablanca (octobre 2024) - Journal du Maroc (septembre 2024) - Financial Times (août 2024)</h6>
+            `;
+        }
+    },
+    4: {
+        title: "Artisanat Marocain : Patrimoine et Innovation",
+        date: "11 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+<h2>Un Secteur en Évolution</h2>
+            <p>L'artisanat marocain est profondément enraciné dans la culture et le patrimoine du pays, représentant une source de fierté nationale. Ce secteur joue un rôle crucial dans l'économie locale, générant des emplois et des revenus pour des milliers de familles, en particulier dans les régions rurales. Les artisans perpétuent des techniques traditionnelles tout en s'adaptant aux demandes des marchés modernes, ce qui crée un équilibre délicat entre tradition et innovation.</p>
+            
+            <h2>Innovation et Design Moderne</h2>
+            <p>Pour rester compétitif sur les marchés internationaux, l'artisanat marocain a progressivement intégré des éléments de design moderne tout en préservant ses racines culturelles. Des collaborations avec des designers internationaux et des initiatives de formation pour les artisans permettent de créer des produits qui allient authenticité et esthétique contemporaine. Ces efforts ouvrent de nouveaux marchés et attirent l'attention des consommateurs étrangers en quête de produits uniques et faits à la main.</p>
+            
+            <h2>Défis et Opportunités du Secteur</h2>
+            <p>Malgré son importance, le secteur artisanal fait face à des défis, notamment la standardisation des produits, l'accès limité aux marchés internationaux et la concurrence des produits fabriqués en série. Le gouvernement marocain, en collaboration avec des associations artisanales, cherche à surmonter ces obstacles par le biais de programmes de formation, d'initiatives de certification et de campagnes de promotion à l'étranger. Cela crée de nouvelles opportunités de croissance et renforce la compétitivité du secteur.</p>
+            
+            <h2>Rôle de l'Artisanat dans l'Économie Locale</h2>
+            <p>L'artisanat contribue non seulement à l'économie locale, mais joue également un rôle essentiel dans la préservation du patrimoine culturel marocain. Les ateliers artisanaux, souvent familiaux, préservent des savoir-faire ancestraux tout en soutenant les communautés rurales. En promouvant les produits artisanaux, le Maroc s'efforce de faire rayonner son patrimoine à l'échelle internationale.</p>
+            
+            <h2>Les Perspectives pour l'Avenir</h2>
+            <p>Avec des initiatives de soutien gouvernemental et une demande croissante de produits authentiques à l'échelle mondiale, le secteur artisanal marocain est bien placé pour prospérer. Les efforts visant à moderniser les processus de production, à améliorer la qualité et à élargir l'accès aux marchés internationaux continueront d'ouvrir des opportunités pour les artisans et de renforcer leur impact économique et culturel.</p>
+            
+            <h6>Sources : Chambre d'Artisanat du Maroc (août 2024) - Le Matin du Sahara (octobre 2024) - Moroccan Handicraft Federation (septembre 2024)</h6>            `;
+        }
+    },
+    5: {
+        title: "Tourisme Durable au Maroc",
+        date: "10 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+<h2>Un Tourisme Respectueux de l'Environnement</h2>
+            <p>Le Maroc s'engage résolument dans le développement d'un tourisme durable, en plaçant la préservation de l'environnement au cœur de ses initiatives. Des projets écologiques, tels que la préservation des espaces naturels et la mise en valeur de sites historiques, contribuent à protéger le patrimoine naturel et culturel du pays. Les politiques visent également à limiter l'empreinte carbone du secteur touristique en promouvant des modes de transport écologiques et des infrastructures respectueuses de l'environnement.</p>
+            
+            <h2>Intégration des Communautés Locales</h2>
+            <p>Pour assurer un développement harmonieux et durable, le Maroc met l'accent sur l'implication des communautés locales dans les projets touristiques. Cette approche participative permet de créer des emplois, de générer des revenus pour les régions rurales et de promouvoir une répartition équitable des bénéfices du tourisme. En intégrant les populations locales aux circuits touristiques, les visiteurs bénéficient d'expériences immersives et authentiques tout en soutenant l'économie locale.</p>
+            
+            <h2>Projets Innovants et Infrastructures Durables</h2>
+            <p>Les acteurs privés, en collaboration avec l'État, investissent massivement dans des infrastructures respectueuses de l'environnement. Des hôtels écologiques, des circuits touristiques axés sur la durabilité et des initiatives de reforestation sont autant de projets qui renforcent l'image du Maroc comme une destination responsable. Ces efforts sont soutenus par des labels de certification qui garantissent le respect des normes environnementales.</p>
+            
+            <h2>Le Rôle des Investisseurs Internationaux</h2>
+            <p>Pour accélérer la transition vers un tourisme durable, le Maroc attire les investisseurs internationaux intéressés par des projets écologiques. Des partenariats public-privé se forment pour financer des initiatives innovantes, comme l'utilisation d'énergies renouvelables dans les complexes touristiques et le développement d'activités écoresponsables. Ces initiatives visent à renforcer l'attractivité du pays tout en répondant aux attentes croissantes des voyageurs soucieux de l'impact de leur séjour.</p>
+            
+            <h2>Perspectives et Défis du Tourisme Durable</h2>
+            <p>Malgré des progrès significatifs, le tourisme durable au Maroc doit relever des défis tels que la sensibilisation accrue des acteurs locaux, la préservation des ressources naturelles face à la pression touristique et le renforcement des infrastructures pour un tourisme responsable. Néanmoins, avec un engagement ferme et une vision claire, le pays est bien positionné pour devenir un modèle de tourisme durable dans la région.</p>
+            
+            <h6>Sources : Ministère du Tourisme (juillet 2024) - Journal Écotourisme Maroc (septembre 2024) - World Travel and Tourism Council (WTTC) (octobre 2024)</h6>
+        `;
+        }
+    },
+    6: {
+        title: "Casablanca Finance City : Un Pôle Financier Régional",
+        date: "10 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+<h2>Une Plateforme Stratégique pour l'Afrique</h2>
+            <p>Casablanca Finance City (CFC) se positionne comme une passerelle stratégique pour les entreprises souhaitant accéder au marché africain. Créée pour attirer les multinationales et les institutions financières, CFC propose un cadre fiscal attractif et des services de pointe, facilitant ainsi l'intégration des investisseurs internationaux. Ce hub financier régional bénéficie d'infrastructures modernes et de réglementations adaptées aux besoins des marchés financiers, renforçant la compétitivité du Maroc à l'échelle continentale.</p>
+            
+            <h2>Avantages Fiscaux et Réglementaires</h2>
+            <p>Pour attirer les investisseurs étrangers, CFC offre une série d'avantages fiscaux, y compris des exonérations et des réductions d'impôts, ainsi qu'un cadre réglementaire simplifié. Ces incitations permettent aux entreprises d'opérer en toute transparence et de réduire leurs coûts, tout en bénéficiant de l'accès à un large réseau de partenaires stratégiques. Le Maroc se positionne ainsi comme une destination privilégiée pour les opérations financières en Afrique du Nord et au-delà.</p>
+            
+            <h2>Un Réseau International et des Partenariats Solides</h2>
+            <p>Casablanca Finance City établit des partenariats avec des institutions financières et des investisseurs internationaux pour renforcer l'attractivité de son écosystème. Grâce à des accords de coopération et à des initiatives communes, CFC offre aux entreprises un accès à des marchés émergents et à des opportunités de croissance. Le développement des réseaux professionnels et des alliances stratégiques fait de Casablanca un point d'ancrage incontournable pour les investissements financiers en Afrique.</p>
+            
+            <h2>Contribution à l'Économie Nationale</h2>
+            <p>CFC contribue de manière significative à l'économie marocaine en attirant des investissements directs étrangers, en créant des emplois de haute qualification et en renforçant la place du Maroc sur la scène financière internationale. Le développement de ce pôle financier dynamise le secteur bancaire, favorise l'innovation et soutient la croissance des marchés de capitaux marocains.</p>
+            
+            <h2>Perspectives de Développement</h2>
+            <p>Le développement futur de CFC repose sur l'élargissement de ses services et l'amélioration continue de son cadre réglementaire. La diversification des activités financières et l'adoption de technologies numériques telles que la fintech et la blockchain renforceront encore son rôle de leader régional. Les opportunités de collaboration internationale, associées à la stabilité politique du Maroc, ouvrent des perspectives prometteuses pour les années à venir.</p>
+            
+            <h6>Sources : Casablanca Finance City Authority (août 2024) - Reuters (octobre 2024) - Banque Mondiale (septembre 2024)</h6>
+        `;        }
+    },
+    7: {
+        title: "Développement de l'Agriculture Durable",
+        date: "10 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+<h2>Pratiques Agricoles Durables et Innovation</h2>
+            <p>L'agriculture durable est devenue une priorité pour le Maroc, avec une volonté claire d'améliorer les pratiques agricoles tout en respectant l'environnement. Des initiatives telles que l'irrigation goutte à goutte, la gestion optimisée de l'eau et la transition vers des cultures biologiques contribuent à renforcer la résilience du secteur face aux défis climatiques. L'innovation technologique, incluant l'usage de drones et de capteurs connectés, optimise les rendements et réduit les pertes, tout en préservant les ressources naturelles.</p>
+            
+            <h2>Impact Économique et Social</h2>
+            <p>Le développement de l'agriculture durable au Maroc génère des retombées économiques positives, en particulier pour les petites exploitations agricoles et les communautés rurales. En adoptant des pratiques respectueuses de l'environnement, les agriculteurs améliorent leur productivité, leur compétitivité à l'international et leur qualité de vie. Cela contribue également à la création d'emplois verts et à l'amélioration des revenus des agriculteurs, renforçant ainsi la stabilité sociale dans les zones rurales.</p>
+            
+            <h2>Encouragement du Gouvernement et Partenariats</h2>
+            <p>Le gouvernement marocain, en partenariat avec des institutions internationales, soutient activement l'adoption de pratiques agricoles durables. Des programmes de subventions, de formation et de soutien technique visent à renforcer la capacité des agriculteurs à adopter des solutions modernes et écologiques. Les coopérations internationales permettent également de diffuser les meilleures pratiques et de financer des projets innovants dans le domaine de l'agriculture verte.</p>
+            
+            <h2>Défis et Opportunités du Secteur</h2>
+            <p>Malgré ses avancées, le secteur agricole marocain fait face à des défis tels que l'instabilité climatique, la pénurie d'eau et la nécessité d'améliorer les infrastructures rurales. Cependant, ces défis représentent aussi des opportunités pour les investisseurs intéressés par le développement durable et les technologies agricoles innovantes. La demande croissante pour des produits bio et écoresponsables ouvre de nouveaux marchés pour les producteurs marocains.</p>
+            
+            <h2>Perspectives d'Avenir</h2>
+            <p>À l'avenir, l'agriculture durable au Maroc continuera de jouer un rôle clé dans la transition vers une économie verte. En renforçant l'innovation, la formation et la coopération internationale, le Maroc est bien positionné pour devenir un leader régional en matière d'agriculture respectueuse de l'environnement et axée sur la durabilité.</p>
+            
+            <h6>Sources : Ministère de l'Agriculture (août 2024) - FAO (septembre 2024) - Green Morocco Plan (octobre 2024)</h6>
+        `;        }
+    },
+    8: {
+        title: "Écosystème des Startups Technologiques",
+        date: "9 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+<h2>Un Écosystème en Pleine Expansion</h2>
+            <p>Le Maroc s'est imposé comme un acteur clé dans le domaine des startups technologiques, avec une scène en pleine croissance soutenue par des incubateurs, des accélérateurs et des investisseurs nationaux et internationaux. Grâce à des initiatives telles que la "StartUp Act" et le soutien de fonds d'investissement, les jeunes entrepreneurs marocains disposent d'un cadre favorable pour développer des solutions innovantes adaptées aux besoins du marché local et régional. Le pays se positionne ainsi comme un carrefour d'innovation, attirant des talents et des capitaux étrangers.</p>
+            
+            <h2>Des Secteurs Porteurs de Croissance</h2>
+            <p>Les startups marocaines se concentrent sur divers secteurs porteurs, notamment la fintech, la santé numérique, l'agriculture intelligente et les énergies renouvelables. En combinant la technologie à des besoins concrets, elles offrent des solutions innovantes qui répondent aux défis économiques et sociaux du pays. Cette diversification sectorielle contribue à renforcer la compétitivité de l'économie marocaine et à améliorer la vie quotidienne des citoyens, notamment dans les zones rurales et urbaines.</p>
+            
+            <h2>Rôle des Incubateurs et des Accélérateurs</h2>
+            <p>Les incubateurs et accélérateurs jouent un rôle essentiel dans l'accompagnement des startups, en leur offrant un accès à des ressources, à des mentors et à un réseau de partenaires. Des initiatives comme "Technopark", "LaFactory" ou encore "Impact Lab" permettent aux entrepreneurs de développer rapidement leurs projets, d'accéder au financement et d'élargir leur portée. Ces structures offrent également un espace d'expérimentation pour les nouvelles technologies, favorisant la collaboration et l'innovation.</p>
+            
+            <h2>Les Défis à Surmonter</h2>
+            <p>Malgré sa dynamique positive, l'écosystème des startups marocaines doit surmonter des défis importants, tels que l'accès limité aux financements, la complexité réglementaire et le manque de visibilité à l'international. Les acteurs du secteur plaident pour une plus grande simplification des démarches administratives, un renforcement des programmes de soutien et une meilleure intégration des technologies émergentes dans le tissu économique national.</p>
+            
+            <h2>Perspectives d'Avenir</h2>
+            <p>Avec le soutien continu du gouvernement, des investisseurs et des partenaires internationaux, les startups marocaines sont bien positionnées pour devenir des moteurs de l'innovation et de la croissance économique. La mise en œuvre de politiques favorables, l'ouverture à de nouveaux marchés et la collaboration accrue avec des partenaires mondiaux permettront à l'écosystème de prospérer et de rivaliser avec les grandes scènes internationales.</p>
+            
+            <h6>Sources : Agence Nationale de Promotion des Startups (octobre 2024) - TechCrunch Afrique (septembre 2024) - Maroc Innovation (août 2024)</h6>
+        `;        }
+    },
+    9: {
+        title: "Tanger Med : Hub Logistique Africain",
+        date: "9 Nov 2024",
+        author: "Bouhlal A.",
+        content: function() {
+            return `
+<h2>Un Pôle Logistique de Classe Mondiale</h2>
+            <p>Tanger Med s'affirme comme l'un des plus grands hubs logistiques et portuaires en Afrique, reliant le continent aux marchés européens, asiatiques et américains. Ce complexe portuaire, doté d'une capacité exceptionnelle de traitement des conteneurs, joue un rôle clé dans le commerce mondial et renforce la compétitivité du Maroc sur la scène internationale. La modernisation continue des infrastructures et l'expansion des zones industrielles adjacentes font de Tanger Med un acteur incontournable dans la chaîne d'approvisionnement mondiale.</p>
+            
+            <h2>Des Infrastructures Modernes et Connectées</h2>
+            <p>Le succès de Tanger Med repose sur des infrastructures modernes, y compris des terminaux à conteneurs automatisés, des zones franches industrielles et une connectivité optimale avec les réseaux routiers et ferroviaires. Cela permet un transit rapide des marchandises et renforce l'efficacité des opérations logistiques. La digitalisation des processus, couplée à des solutions technologiques avancées, contribue à optimiser les flux et à réduire les coûts pour les entreprises opérant dans le port.</p>
+            
+            <h2>Opportunités pour les Investisseurs</h2>
+            <p>La zone franche industrielle de Tanger Med attire de nombreux investisseurs, en particulier dans les secteurs de l'automobile, de la logistique et de la transformation. Les entreprises bénéficient d'incitations fiscales et d'un accès privilégié aux marchés internationaux, renforçant leur compétitivité et leur croissance. Cette dynamique attire également des partenariats avec des multinationales, générant des emplois et stimulant l'économie locale.</p>
+            
+            <h2>Un Lien entre l'Afrique et l'Europe</h2>
+            <p>La position stratégique de Tanger Med, située à proximité du détroit de Gibraltar, en fait un point de passage incontournable pour le commerce maritime. En tant que hub logistique, il relie efficacement les flux commerciaux entre l'Afrique, l'Europe et le reste du monde, consolidant le rôle du Maroc en tant que passerelle internationale et facilitant les échanges économiques.</p>
+            
+            <h2>Perspectives de Croissance</h2>
+            <p>Pour l'avenir, Tanger Med prévoit une expansion continue de ses capacités et une diversification de ses services logistiques. L'intégration de nouvelles technologies, l'amélioration des connexions intermodales et la promotion d'une gestion durable des ressources contribueront à renforcer la position du hub comme leader régional et mondial.</p>
+            
+            <h6>Sources : Autorité Portuaire de Tanger Med (septembre 2024) - Financial Times (août 2024) - Banque Mondiale (octobre 2024)</h6>
+        `;        }
+    }
+};
+
+        const publication = publications[publicationId] || {
+            title: "Article",
+            date: "Date de publication",
+            author: "Bouhlal A.",
+            content: function() {
+                return `Contenu de l'article`
+            }
+        };
+
+        return `
+            <div class="modal-header">
+                <h2>${publication.title}</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0;">
+                    <span><i class="far fa-calendar-alt"></i> ${publication.date}</span>
+                    <span><i class="far fa-user"></i> ${publication.author}</span>
+                </div>
+            </div>
+            
+            <div class="modal-body">
+                ${publication.content()}
+                
+                <div style="margin: 2rem 0;">
+                    <h3>Mots-clés</h3>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        ${(publication.tags || ['Article']).map(tag => `
+                            <span class="filter-btn" style="font-size: 0.9rem;">${tag}</span>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div style="margin: 2rem 0;">
+                    <h3>Partager</h3>
+                    <div style="display: flex; gap: 2rem; margin-top: 1rem; justify-content: center;">
+                        <button class="social-share-btn" onclick="handleShare('facebook')">
+                            <i class="fab fa-facebook-f fa-2x"></i>
+                        </button>
+                        <button class="social-share-btn" onclick="handleShare('twitter')">
+                            <i class="fab fa-twitter fa-2x"></i>
+                        </button>
+                        <button class="social-share-btn" onclick="handleShare('linkedin')">
+                            <i class="fab fa-linkedin-in fa-2x"></i>
+                        </button>
+                        <button class="social-share-btn" onclick="handleShare('whatsapp')">
+                            <i class="fab fa-whatsapp fa-2x"></i>
+                        </button>
+                        <button class="social-share-btn" onclick="handleShare('instagram')">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function handleShare(platform) {
+        console.log(`Sharing on ${platform}`);
+    }
+});
+
+// Join button redirige vers constant
+document.getElementById('joinButton').addEventListener('click', function() {
+    window.location.href = 'consultant.html';
+});
+
+// Sélection du lien du formulaire d'accord
+document.querySelector('a[href="#banana-agreement"]').addEventListener('click', function(event) {
+    event.preventDefault(); // Empêche l'action par défaut du clic
+
+    // Cible la section "Banana Agreement"
+    const bananaSection = document.getElementById('banana-agreement');
+    if (bananaSection) {
+        bananaSection.scrollIntoView({
+            behavior: 'smooth', // Défilement fluide
+            block: 'start' // Positionne le titre en haut de la vue
+        });
+    }
+});
+
+</script>
+</body>
+</html>
